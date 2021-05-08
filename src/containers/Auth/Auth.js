@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
-import { checkValidity } from '../../shared/utility';
+import { updateObject, checkValidity } from '../../shared/utility';
 import * as actions from '../../store/actions/index';
 import classes from './Auth.css';
 
@@ -58,18 +58,15 @@ class Auth extends Component {
 
   inputChangedHandler = (event, controlName) => {
     event.preventDefault();
-    const updatedControls = {
-      ...this.state.controls,
-      [controlName]: {
-        ...this.state.controls[controlName],
+    const updatedControls = updateObject(this.state.controls, {
+      [controlName]: updateObject(this.state.controls[controlName], {
         value: event.target.value,
-        validation: {
-          ...this.state.controls[controlName].validation,
+        validation: updateObject(this.state.controls[controlName].validation, {
           valid: checkValidity(event.target.value, this.state.controls[controlName].validation),
           touched: true
-        }
-      }
-    };
+        })
+      })
+    });
     this.setState({controls: updatedControls});
   };
 
