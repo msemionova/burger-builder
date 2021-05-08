@@ -31,8 +31,8 @@ const buildControls = (props) => (
 );
 
 buildControls.propTypes = {
-  ingredientAdded: PropTypes.func.isRequired,
-  ingredientRemoved: PropTypes.func.isRequired,
+  ingredientAdded: PropTypes.func,
+  ingredientRemoved: PropTypes.func,
   disabled: PropTypes.object.isRequired,
   price: PropTypes.number.isRequired,
   purchaseble: PropTypes.bool.isRequired,
